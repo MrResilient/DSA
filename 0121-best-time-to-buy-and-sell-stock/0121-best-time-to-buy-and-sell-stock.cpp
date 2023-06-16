@@ -6,7 +6,7 @@ public:
            return 0;
        }
        int l = 0, r = 1, profit = 0;
-
+                                                // Sliding Window Approach O(n,1)
        while(r < len){
            if(prices[r] < prices[l]){
                l = r;
