@@ -5,15 +5,14 @@ public:
        if(len == 1){
            return 0;
        }
-       int l = 0, r = 1, profit = 0;
+       int profit = 0;
+       int buy_price = prices[0]; //min_price
 
-       while(r < len){
-           if(prices[r] < prices[l]){
-               l = r;
-               r++;
+       for(int i=1; i<len; i++){
+           if(prices[i] > prices[i-1]){
+               profit = max(profit, prices[i] - buy_price);
            }else{
-               profit = max(profit, prices[r] - prices[l]);
-               r++;
+               buy_price = min(buy_price, prices[i]);
            }
        }
        return profit;
