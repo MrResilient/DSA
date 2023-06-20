@@ -2,26 +2,28 @@ class Solution {
 public:
     int numOfSubarrays(vector<int>& arr, int k, int threshold) {
         int len = arr.size();
-        int l = 0, r = 0;
+        int l = 0, r = k;
         int count = 0, sum = 0;
 
-        while(r < len){                       
+        for(int i=0; i<k; ++i){
+            sum += arr[i];
+        }
 
-            sum += arr[r];
+        if(sum/k >= threshold){
+            count++;
+        }
 
-            if(r - l + 1 < k){
-                r++;
-                continue;
-            }
+        while(r < len){   
+            // here doing (l++, r++) and (++l, ++r) created noticable difference, BE CAREEFUL ABOUT IT.
+
+            sum -= arr[l++];
+            sum += arr[r++];
             
-            if((sum/k) >= threshold){
+            if(sum/k >= threshold){
                 count++;
             }
-
-           sum -= arr[l];
-           l++;
-           r++;                        
         }
+
         return count;
     }
 };
