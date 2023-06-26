@@ -12,18 +12,15 @@ public:
     }
 
     bool isHappy(int n) {
-        int slow = n;
-        int fast = nxt_form(n);
+        
+        unordered_set<int> set;
 
-        while(slow != fast && fast != 1){
-            slow = nxt_form(slow);
-            fast = nxt_form(nxt_form(fast));
+        // this loop will terminate as it detects loop when it find n already present in set in any iteration using count() function.
+        while(n != 1 && !(set.count(n))){
+            set.insert(n);
+            n = nxt_form(n);
         }
 
-        if(fast == 1){
-            return true;
-        }
-
-        return false;
+        return n == 1;
     }
 };
