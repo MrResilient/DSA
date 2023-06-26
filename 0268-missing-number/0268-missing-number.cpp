@@ -2,21 +2,13 @@ class Solution {
 public:
     int missingNumber(vector<int>& nums) {
         int len = nums.size();
-        int ans = 0;
+        int ans = len;
 
-        unordered_map<int, int> hash(len + 1);
-
+        //XOR is it's own inverse.
         for(int i = 0; i < len; ++i){
-            hash[nums[i]]++;
+            ans ^= (i ^ nums[i]);
         }
-
-        for(int i = 0; i < len + 1; ++i){
-            if(hash[i] == 0){
-                ans = i;
-                break;
-            }
-        }
-
+                
         return ans;
     }
 };
