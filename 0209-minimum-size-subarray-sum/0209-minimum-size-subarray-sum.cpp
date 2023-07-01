@@ -8,22 +8,13 @@ public:
 
         while(r < len){ 
 
-            // if(l == len){
-            //     break;
-            // }         
-
-            // if(sum < target){
-            //   if(l == r && r == len - 1){
-            //      sum += 0;
-            //   } else {
-                sum += nums[r++];
-            //   }
-            // }
+            sum += nums[r++];
 
             while(sum >= target){
                 ans = min(ans, r - l );
                 sum -= nums[l++];
             }
+            
         }
         
         if(ans == INT_MAX){
