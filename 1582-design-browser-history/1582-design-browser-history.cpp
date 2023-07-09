@@ -1,26 +1,46 @@
 class BrowserHistory {
 public:
-    unordered_map<int, string> history;
-    int forw = 0, curr = 0;
+    struct ll{
+        string web_url;
+        ll* next;
+        ll* prev;
+        ll(): web_url(""), prev(nullptr), next(nullptr){
+
+        }
+        ll(string x): web_url(x), prev(nullptr), next(nullptr){
+
+        }
+        ll(string x, ll* prev, ll* next): web_url(x), prev(prev), next(next){
+
+        }
+    };
+    ll* start = new ll();
+    ll* curr;
 
     BrowserHistory(string homepage) {
-        history[curr] = homepage;
+        start->web_url = homepage;
+        curr = start;
     }
     
     void visit(string url) {
-        curr++;
-        history[curr] = url;
-        forw = curr;    
+        curr->next = new ll();
+        curr->next->prev = curr;
+        curr->next->web_url = url;
+        curr = curr->next;   
     }
     
     string back(int steps) {
-        curr = max(0, curr - steps);
-        return history[curr];
+        while(curr != start && steps--){
+            curr = curr->prev;
+        }
+        return curr->web_url;
     }
     
     string forward(int steps) {
-        curr = min(forw, curr + steps);
-        return history[curr];
+        while(curr->next && steps--){
+            curr = curr->next;
+        }
+        return curr->web_url;
     }
 };
 
