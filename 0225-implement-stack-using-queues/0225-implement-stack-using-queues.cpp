@@ -42,6 +42,7 @@ public:
         } else {
             return true;
         }
+        //return(q1.empty() && q2.empty()); also we can do this.
     }
 };
 
